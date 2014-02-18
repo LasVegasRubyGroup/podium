@@ -1,0 +1,14 @@
+# A sample Guardfile
+# More info at https://github.com/guard/guard#readme
+
+guard :rspec, version: 2, cli: "--color --format nested --tty" do
+  watch(%r{^spec/actions/.+_spec\.rb$})
+  watch(%r{^spec/forms/.+_spec\.rb$})
+  watch(%r{^spec/services/.+_spec\.rb$})
+  watch('spec/fast_spec_helper.rb')         { ["spec/actions","spec/forms","spec/services"] }
+  watch(%r{^app/actions/(.+)\.rb$})         { |m| "spec/actions/#{m[1]}_spec.rb" }
+  watch(%r{^app/forms/(.+)\.rb$})           { |m| "spec/forms/#{m[1]}_spec.rb" }
+  watch(%r{^app/services/(.+)\.rb$})        { |m| "spec/services/#{m[1]}_spec.rb" }
+  watch(%r{^spec/support_fast/(.+)\.rb$})   { ["spec/actions","spec/forms","spec/services"]}
+end
+
