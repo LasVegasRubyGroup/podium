@@ -58,6 +58,9 @@ gem 'simple_form'
 # We'll use draper to create nice logic-less views and wrap our model-like objects
 gem 'draper'
 
+# We'll use fob for form objects
+gem 'fob'
+
 # Twitter bootstrap because everyone else is
 gem 'bootstrap-sass', '~> 3.1.0'
 
