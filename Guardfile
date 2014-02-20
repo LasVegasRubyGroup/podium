@@ -1,7 +1,7 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-guard :rspec, version: 2, cli: "--color --format nested --tty" do
+guard :rspec, cmd: 'bundle exec rspec --color --format nested --tty', spec_paths: ['spec/actions','spec/forms','spec/services','spec/decorators','spec/models'] do
   watch(%r{^spec/actions/.+_spec\.rb$})
   watch(%r{^spec/forms/.+_spec\.rb$})
   watch(%r{^spec/services/.+_spec\.rb$})

@@ -15,13 +15,13 @@ describe 'Listing Topics' do
 
     context 'when there are 3 topics in the system' do
       before do
-        # CreateTopic.new(title: 'Topic 1', description: 'First Topic').call
-        # CreateTopic.new(title: 'Topic 2', description: 'Second Topic').call
-        # CreateTopic.new(title: 'Topic 3', description: 'Third Topic').call
+        Repositories::Creates::CreateTopic.new(title: 'Topic 1', description: 'First Topic').call
+        Repositories::Creates::CreateTopic.new(title: 'Topic 2', description: 'Second Topic').call
+        Repositories::Creates::CreateTopic.new(title: 'Topic 3', description: 'Third Topic').call
       end
 
       it 'shows the topcis header with 3 topics' do
-        pending 'Implementation of CreateTopic needed'
+        pending 'Test setup works, need to implement reader for controller'
         visit home_page
         expect(current_path).to eq root_path
         expect(page).to have_selector('.topics-title', text: I18n.t('topics.index.title'))
