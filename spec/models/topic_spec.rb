@@ -1,5 +1,5 @@
 require 'model_spec_helper'
-require File.join(MODELS_ROOT, '/topic.rb')
+Require.me(__FILE__)
 
 describe Topic do
   subject(:topic) { Topic.new }

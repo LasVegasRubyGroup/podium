@@ -1,5 +1,5 @@
 require 'decorator_spec_helper'
-require File.join(DECORATORS_ROOT, '/topics_decorator.rb')
+Require.me(__FILE__)
 
 describe TopicsDecorator do
 end
