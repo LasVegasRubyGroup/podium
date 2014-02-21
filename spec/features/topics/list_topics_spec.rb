@@ -1,6 +1,6 @@
 require 'feature_spec_helper'
 
-describe 'Listing Topics' do
+describe 'Listing Topics', :js do
   context 'on the home page' do
     let(:home_page) { root_path }
 
@@ -20,14 +20,13 @@ describe 'Listing Topics' do
         Repositories::Creates::CreateTopic.new(title: 'Topic 3', description: 'Third Topic').call
       end
 
-      it 'shows the topcis header with 3 topics' do
-        pending 'Test setup works, need to implement reader for controller'
+      it 'shows the topics header with 3 topics' do
         visit home_page
         expect(current_path).to eq root_path
         expect(page).to have_selector('.topics-title', text: I18n.t('topics.index.title'))
-        expect(page).to have_selector('.topic'), text: 'Topic 1'
-        expect(page).to have_selector('.topic'), text: 'Topic 2'
-        expect(page).to have_selector('.topic'), text: 'Topic 3'
+        expect(page).to have_selector('.topic', text: 'Topic 1')
+        expect(page).to have_selector('.topic', text: 'Topic 2')
+        expect(page).to have_selector('.topic', text: 'Topic 3')
       end
     end
   end

@@ -11,11 +11,7 @@ require 'rubygems'
 # SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
 # SimpleCov.start 'rails'
 
-require 'draper'
-Draper::ViewContext.test_strategy :fast
-
 Dir[File.expand_path('../../app/services/**/*.rb', __FILE__)].each { |f| require f }
-Dir[File.expand_path('../../app/decorators/**/*.rb', __FILE__)].each { |f| require f }
 Dir[File.expand_path('../../app/forms/**/*.rb', __FILE__)].each { |f| require f }
 Dir[File.expand_path('../../app/actions/**/*.rb', __FILE__)].each { |f| require f }
 require 'rspec/autorun'
