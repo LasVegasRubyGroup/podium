@@ -8,6 +8,6 @@ class CreateTopics < ActiveRecord::Migration
       t.boolean :deleted, default: false
       t.timestamps
     end
-    add_index :topics, :uuid, unique: true
+    add_index :topics, :uuid
   end
 end
