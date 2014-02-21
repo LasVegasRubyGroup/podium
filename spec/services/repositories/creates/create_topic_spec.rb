@@ -1,4 +1,6 @@
 require 'fast_spec_helper'
+require File.join(SERVICES_ROOT, '/repositories/creates/create.rb')
+require File.join(SERVICES_ROOT, '/repositories/creates/create_topic.rb')
 
 module Repositories
   module Creates

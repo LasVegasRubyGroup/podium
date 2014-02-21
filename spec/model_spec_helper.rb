@@ -11,8 +11,9 @@ require 'rubygems'
 # SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
 # SimpleCov.start 'rails'
 
+MODELS_ROOT = File.expand_path('../../app/models', __FILE__)
+
 require 'active_record'
-Dir[File.expand_path("../../app/models/**/*.rb", __FILE__)].each { |f| require f }
 require 'rspec/rails/extensions/active_record/base'
 require 'shoulda'
 require 'rspec/autorun'

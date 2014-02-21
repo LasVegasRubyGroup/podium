@@ -11,9 +11,10 @@ require 'rubygems'
 # SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
 # SimpleCov.start 'rails'
 
-Dir[File.expand_path('../../app/services/**/*.rb', __FILE__)].each { |f| require f }
-Dir[File.expand_path('../../app/forms/**/*.rb', __FILE__)].each { |f| require f }
-Dir[File.expand_path('../../app/actions/**/*.rb', __FILE__)].each { |f| require f }
+SERVICES_ROOT = File.expand_path('../../app/services', __FILE__)
+FORMS_ROOT = File.expand_path('../../app/forms', __FILE__)
+ACTIONS_ROOT = File.expand_path('../../app/actions', __FILE__)
+
 require 'rspec/autorun'
 
 Dir["support_fast/**/*.rb"].each {|f| require f}

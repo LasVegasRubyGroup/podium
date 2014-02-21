@@ -1,4 +1,6 @@
 require 'fast_spec_helper'
+require File.join(SERVICES_ROOT, '/repositories/reads/read.rb')
+require File.join(SERVICES_ROOT, '/repositories/reads/read_topics.rb')
 
 module Repositories
   module Reads

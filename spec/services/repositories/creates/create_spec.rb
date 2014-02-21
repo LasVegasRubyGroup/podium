@@ -1,8 +1,9 @@
 require 'fast_spec_helper'
+require File.join(SERVICES_ROOT, '/repositories/creates/create.rb')
 
 module Repositories
   module Creates
-    describe CreateTopic do
+    describe Create do
       subject(:service) { Create.new(parameters) }
       let(:parameters) { {} }
 

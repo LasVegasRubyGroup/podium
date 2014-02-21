@@ -13,7 +13,9 @@ require 'rubygems'
 
 require 'draper'
 Draper::ViewContext.test_strategy :fast
-Dir[File.expand_path('../../app/decorators/**/*.rb', __FILE__)].each { |f| require f }
+
+DECORATORS_ROOT = File.expand_path('../../app/decorators', __FILE__)
+
 require 'rspec/autorun'
 
 Dir["support_decorators/**/*.rb"].each {|f| require f}

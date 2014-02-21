@@ -1,5 +1,6 @@
 require 'fast_spec_helper'
 require 'responsive_service'
+require File.join(ACTIONS_ROOT, '/topics/index_action.rb')
 
 module Topics
   describe IndexAction do
