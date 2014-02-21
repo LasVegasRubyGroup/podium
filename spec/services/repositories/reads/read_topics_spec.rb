@@ -1,6 +1,4 @@
 require 'fast_spec_helper'
-Require.parent(__FILE__, 'read')
-Require.me(__FILE__)
 
 module Repositories
   module Reads

@@ -1,5 +1,4 @@
 require 'model_spec_helper'
-Require.me(__FILE__)
 
 describe Topic do
   subject(:topic) { Topic.new }

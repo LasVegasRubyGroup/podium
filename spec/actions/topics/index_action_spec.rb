@@ -1,6 +1,5 @@
 require 'fast_spec_helper'
 require 'responsive_service'
-Require.me(__FILE__)
 
 module Topics
   describe IndexAction do

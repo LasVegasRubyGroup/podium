@@ -20,3 +20,6 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.order = 'random'
 end
+
+require 'active_support'
+require 'active_support/dependencies'
