@@ -25,6 +25,6 @@ ActiveRecord::Schema.define(version: 20140220225338) do
     t.datetime "updated_at"
   end
 
-  add_index "topics", ["uuid"], name: "index_topics_on_uuid", unique: true, using: :btree
+  add_index "topics", ["uuid"], name: "index_topics_on_uuid", using: :btree
 
 end
