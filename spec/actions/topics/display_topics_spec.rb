@@ -1,9 +1,8 @@
-require 'fast_spec_helper'
-require 'responsive_service'
+require 'actions_spec_helper'
 
 module Topics
-  describe IndexAction do
-    subject(:action) { IndexAction.new }
+  describe DisplayTopics do
+    subject(:action) { DisplayTopics.new }
     let(:reader_factory) { double :reader_factory, new: nil }
     let(:reader) { double :reader, call: results }
     let(:results) { nil }

@@ -1,4 +1,4 @@
-require 'model_spec_helper'
+require 'models_spec_helper'
 
 describe Topic do
   subject(:topic) { Topic.new }

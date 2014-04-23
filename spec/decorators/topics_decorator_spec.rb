@@ -1,4 +1,4 @@
-require 'decorator_spec_helper'
+require 'decorators_spec_helper'
 
 describe TopicsDecorator do
 end

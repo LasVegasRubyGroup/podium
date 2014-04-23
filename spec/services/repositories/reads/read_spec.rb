@@ -1,4 +1,4 @@
-require 'fast_spec_helper'
+require 'services_spec_helper'
 
 module Repositories
   module Reads
@@ -6,7 +6,7 @@ module Repositories
       subject(:service) { Read.new(filters) }
       let(:filters) { {} }
 
-      describe '#resource_collection' do
+      describe '#default_resource_collection' do
         it 'raises an error requesting override' do
           expect{ service.resource_collection }.to raise_error('No Default Collection: Please Override')
         end

@@ -1,4 +1,4 @@
-require 'feature_spec_helper'
+require 'features_spec_helper'
 
 describe 'Listing Topics', :js do
   context 'on the home page' do

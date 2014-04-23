@@ -1,7 +1,7 @@
 module Repositories
   module Reads
     class Read
-      attr_writer :resource_collection
+      attr_defaultable :resource_collection, -> { default_resource_collection }
       attr_reader :filters
 
       def initialize(filters)
@@ -12,11 +12,12 @@ module Repositories
         remove_deleted(reduce_to_current(resource_collection.where(filters).to_a))
       end
 
-      def resource_collection
-        raise 'No Default Collection: Please Override'
+      def default_resource_collection
+        fail NotImplementedError, 'No Default Collection: Please Override'
       end
 
       private
+
       def reduce_to_current(list)
         list_by_uuid(list).map { |uuid, versions|
           sorted = sort_by_created_at(versions) # sort_by is expensive for simple keys so we use sort

@@ -1,4 +1,4 @@
-require 'fast_spec_helper'
+require 'services_spec_helper'
 
 module Repositories
   module Creates
