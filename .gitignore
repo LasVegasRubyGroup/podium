@@ -20,3 +20,6 @@
 
 # Ignore .ruby-gemset which can be a per install basis
 /.ruby-gemset
+
+# Ignore coverage reports
+/coverage

@@ -1,0 +1,8 @@
+- content_for(:title) { t('.title') }
+
+.row
+  .fullwidth
+    h2.topics-title
+      = t('.title')
+    ul
+      = render @topics
