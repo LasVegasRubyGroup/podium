@@ -19,19 +19,15 @@ module Repositories
       private
 
       def reduce_to_current(list)
-        list_by_uuid(list).map { |uuid, versions|
-          sorted = sort_by_created_at(versions) # sort_by is expensive for simple keys so we use sort
-          sorted.last.created = sorted.first.created_at
-          sorted.last
-        }
+        list_by_uuid(list).map do |uuid, versions|
+          first, last = versions.minmax_by &:created_at
+          last.created = first.created_at
+          last
+        end
       end
 
       def list_by_uuid(list)
         list.group_by { |object| object.uuid }
-      end
-
-      def sort_by_created_at(list)
-        list.sort { |o1, o2| o1.created_at <=> o2.created_at }
       end
 
       def remove_deleted(list)
