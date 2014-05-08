@@ -14,5 +14,5 @@ To get started developing:
 5. Run `gem install bundler`.
 6. Run `bundle`
 7. Install node.js and phantomjs.  These are external packages that our test suite uses and cannot be installed with bundler.
-8. Install PostgreSQL and create databses named `podium_test` and `podium_development`.
+8. Install PostgreSQL and create databases named `podium_test` and `podium_development`.
 9. Run `rake` and make sure all the examples succeed.
