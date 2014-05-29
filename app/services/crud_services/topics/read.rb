@@ -1,6 +1,6 @@
-module Repositories
-  module Reads
-    class ReadTopics < Read
+module CrudServices
+  module Topics
+    class Read < CrudServices::Read
       def default_resource_collection
         Topic
       end

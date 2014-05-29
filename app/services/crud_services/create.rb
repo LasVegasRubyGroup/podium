@@ -20,7 +20,7 @@ module Repositories
       private
 
       def parameters_with_uuid
-        parameters.merge(uuid: uuid_generator.uuid)
+        parameters.reverse_merge(uuid: uuid_generator.uuid)
       end
     end
   end
