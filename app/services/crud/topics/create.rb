@@ -1,6 +1,6 @@
-module CrudServices
+module Crud
   module Topics
-    class Create < CrudServices::Create
+    class Create < Crud::Create
       def default_resource_factory
         Topic
       end

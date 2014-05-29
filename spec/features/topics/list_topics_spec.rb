@@ -15,9 +15,9 @@ describe 'Listing Topics', :js do
 
     context 'when there are 3 topics in the system' do
       before do
-        Repositories::Creates::CreateTopic.new(title: 'Topic 1', description: 'First Topic').call
-        Repositories::Creates::CreateTopic.new(title: 'Topic 2', description: 'Second Topic').call
-        Repositories::Creates::CreateTopic.new(title: 'Topic 3', description: 'Third Topic').call
+        Crud::Topics::Create.new(title: 'Topic 1', description: 'First Topic').call
+        Crud::Topics::Create.new(title: 'Topic 2', description: 'Second Topic').call
+        Crud::Topics::Create.new(title: 'Topic 3', description: 'Third Topic').call
       end
 
       it 'shows the topics header with 3 topics' do

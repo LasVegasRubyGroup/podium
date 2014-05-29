@@ -1,9 +1,9 @@
 require 'services_spec_helper'
 
-module Repositories
-  module Creates
-    describe CreateTopic do
-      subject(:service) { CreateTopic.new(parameters) }
+module Crud
+  module Topics
+    describe Create do
+      subject(:service) { Create.new(parameters) }
       let(:parameters) { {} }
       let(:internal_parameters) { { uuid: uuid } }
       let(:resource_factory) { double :resource_factory, create: nil }
