@@ -65,7 +65,7 @@ gem 'fob'
 gem 'bootstrap-sass', '~> 3.1.0'
 
 # Responsive Service for clean services
-gem 'responsive_service'
+gem 'response_state'
 
 # Adds the ability to have defaultable attributes, nice for DI
 gem 'attr_defaultable', require: 'extend_attr_defaultable'

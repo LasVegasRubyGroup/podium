@@ -211,7 +211,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     request_store (1.0.5)
-    responsive_service (0.1.0)
+    response_state (0.2.1)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -327,7 +327,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
-  responsive_service
+  response_state
   rspec-rails
   ruby_gntp
   sass-rails (~> 4.0.0)
