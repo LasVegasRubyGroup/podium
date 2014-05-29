@@ -1,6 +1,6 @@
 module Topics
   class DisplayTopics < ResponseState::Service
-    attr_defaultable :reader_factory, -> { Repositories::Reads::ReadTopics }
+    attr_defaultable :reader_factory, -> { Crud::Topics::Read }
 
     def call(&block)
       yield send_state :success, '', results

@@ -1,9 +1,9 @@
 require 'services_spec_helper'
 
-module Repositories
-  module Reads
-    describe ReadTopics do
-      subject(:service) { ReadTopics.new(filters) }
+module Crud
+  module Topics
+    describe Read do
+      subject(:service) { Read.new(filters) }
       let(:filters) { {} }
       let(:resource_collection) { double :resource_collection, where: nil }
 
