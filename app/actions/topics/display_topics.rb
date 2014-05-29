@@ -1,9 +1,9 @@
 module Topics
-  class DisplayTopics
+  class DisplayTopics < ResponseState::Service
     attr_defaultable :reader_factory, -> { Repositories::Reads::ReadTopics }
 
     def call(&block)
-      yield ResponsiveService::Response.new(:success, '', results)
+      yield send_state :success, '', results
     end
 
     private
