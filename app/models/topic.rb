@@ -1,11 +1,13 @@
 class Topic < ActiveRecord::Base
-  attr_writer :created
+  include ModelDefaults
 
-  def created
-    @created || created_at
-  end
+  # attr_writer :created
 
-  def updated
-    created_at
-  end
+  # def created
+  #   @created || created_at
+  # end
+
+  # def updated
+  #   created_at
+  # end
 end

@@ -26,7 +26,7 @@ module Crud
     end
 
     def list_by_uuid(list)
-      list.group_by { |object| object.uuid }
+      list.group_by { |object| object.uuid }    
     end
 
     def remove_deleted(list)

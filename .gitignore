@@ -23,3 +23,9 @@
 
 # Ignore coverage reports
 /coverage
+
+# Ignore .DS_Store
+.DS_Store
+
+# Ignore emacs temp files
+*~

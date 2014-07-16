@@ -9,17 +9,19 @@ module Crud
     end
 
     def call
-      resource_factory.create(parameters_with_uuid)
+      ActiveRecord::Base.transaction do
+        row = resource_factory.create!(parameters)
+        companion_resource_factory.create! topic_id: row.read_attribute(:id), uuid: row.uuid
+      end
     end
 
     def default_resource_factory
       fail NotImplementedError, 'No Default Factory: Please Override'
     end
 
-    private
-
-    def parameters_with_uuid
-      parameters.reverse_merge(uuid: uuid_generator.uuid)
+    def companion_resource_factory
+      "Current#{resource_factory}".constantize
     end
+
   end
 end

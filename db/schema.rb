@@ -11,20 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220225338) do
+ActiveRecord::Schema.define(version: 20140716002431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "topics", force: true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.string   "uuid"
-    t.boolean  "deleted",     default: false
+  create_table "current_topics", force: true do |t|
+    t.integer  "topic_id",                   null: false
+    t.string   "uuid",                       null: false
+    t.boolean  "deleted",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "topics", ["uuid"], name: "index_topics_on_uuid", using: :btree
+  add_index "current_topics", ["topic_id"], name: "index_current_topics_on_topic_id", unique: true, using: :btree
+  add_index "current_topics", ["uuid"], name: "index_current_topics_on_uuid", unique: true, using: :btree
+
+  create_table "topics", force: true do |t|
+    t.string   "title",       default: "",    null: false
+    t.text     "description", default: "",    null: false
+    t.string   "uuid"
+    t.boolean  "deleted",     default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "topics", ["uuid"], name: "index_topics_on_uuid", unique: true, using: :btree
 
 end
