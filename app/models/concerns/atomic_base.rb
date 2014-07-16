@@ -52,4 +52,14 @@ module AtomicBase
       super
   end
 
+  # created returns created_at for the base
+  def created
+    self.created_at
+  end
+
+  # updated returnes created_at for the current record
+  def updated
+    self.data.created_at
+  end
+
  end
