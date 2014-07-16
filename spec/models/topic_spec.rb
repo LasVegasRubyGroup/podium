@@ -1,7 +1,8 @@
 require 'models_spec_helper'
 
 describe Topic do
-  subject(:topic) { Topic.new}
+  subject(:topic) {Crud::Topics::Create.new(params).call}
+  let(:params) {{}}
 
   it 'has a record count' do
     n = Topic.count
@@ -10,20 +11,35 @@ describe Topic do
 
   describe 'create' do
 
-    it 'builds a new topic' do
-      expect(topic).not_to be_nil
-    end
+    context 'default parameters' do
     
-    it 'creates a record in the topics table' do
-      n = Topic.count
-      Crud::Topics::Create.new(topic.attributes).call
-      expect(Topic.count).to eq(n+1)
+      it 'creates a record in the topics table' do
+        n = Topic.count
+        topic
+        expect(Topic.count).to eq(n+1)
+      end
+
+      it 'creates a record in the current_topics tables' do
+        n = ExtTopic.count
+        topic    
+        expect(ExtTopic.count).to eq(n+1)
+      end
+
     end
 
-    it 'creates a record in the current_topics tables' do
-      n = CurrentTopic.count
-      Crud::Topics::Create.new(topic.attributes).call
-      expect(CurrentTopic.count).to eq(n+1)
+    context 'with parameters' do
+
+      let(:params) {{title: "My Talk", description: "awesome"}}
+
+      it 'provides direct access to its extended attributes' do
+        expect(topic.title).to eq("My Talk")
+        expect(topic.description).to eq("awesome")
+      end
+
+      it 'has an array of versions' do
+
+      end
+
     end
 
   end
