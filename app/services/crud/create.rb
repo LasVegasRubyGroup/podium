@@ -10,8 +10,10 @@ module Crud
 
     def call
       ActiveRecord::Base.transaction do
-        row = resource_factory.create!(parameters)
-        companion_resource_factory.create! topic_id: row.read_attribute(:id), uuid: row.uuid
+        uuid = uuid_generator.uuid
+        params = parameters_with_uuid(uuid)
+        row = resource_factory.create!(params)
+        base_resource_factory.create! topic_id: row.read_attribute(:id), uuid: uuid
       end
     end
 
@@ -19,8 +21,12 @@ module Crud
       fail NotImplementedError, 'No Default Factory: Please Override'
     end
 
-    def companion_resource_factory
-      "Current#{resource_factory}".constantize
+    def base_resource_factory
+      "Base#{resource_factory}".constantize
+    end
+
+    def parameters_with_uuid(uuid)
+      parameters.reverse_merge(uuid: uuid)
     end
 
   end

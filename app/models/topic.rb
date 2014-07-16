@@ -1,5 +1,5 @@
 class Topic < ActiveRecord::Base
-  include ModelDefaults
+  include AtomicDefaults
 
   # attr_writer :created
 
