@@ -19,7 +19,7 @@ describe Topic do
         expect(Topic.count).to eq(n+1)
       end
 
-      it 'creates a record in the current_topics tables' do
+      it 'creates a record in the ext_topics tables' do
         n = ExtTopic.count
         topic    
         expect(ExtTopic.count).to eq(n+1)
@@ -36,40 +36,47 @@ describe Topic do
         expect(topic.description).to eq("awesome")
       end
 
-      it 'has an array of versions' do
-
-      end
+      it 'has an array of versions' 
 
     end
 
   end
 
-  # describe '#created' do
-  #   context 'when created has been set' do
-  #     let(:earlier) { Time.new(2014, 1, 1) }
-  #     before { topic.created = earlier }
+  describe 'update' do
 
-  #     it 'returns created' do
-  #       expect(topic.created).to eq earlier
-  #     end
-  #   end
+    let(:new_title) {"new title"}
+    let(:new_description) {"new description"}
+    let(:update_params) {{title: new_title, description: new_description}}
+    let(:updated_topic) { Crud::Topics::Update.new(topic, update_params).call }
 
-  #   context 'when created has not been set' do
-  #     let(:now) { Time.now }
-  #     before { topic.created_at = now }
+    it 'creates a new record in the ext_topics table' do
+      n = ExtTopic.count
+      updated_topic
+      expect(ExtTopic.count).to eq(n+2)
+    end
 
-  #     it 'returns created_at' do
-  #       expect(topic.created).to eq now
-  #     end
-  #   end
-  # end
+    it 'does not create a new record in the topics table' do
+      n = Topic.count
+      updated_topic
+      expect(Topic.count).to eq(n+1)   
+    end
 
-  # describe '#updated' do
-  #   let(:now) { Time.now }
-  #   before { topic.created_at = now }
+    it 'has the new title and description' do
+      expect(updated_topic.title).to eq("new title")
+      expect(updated_topic.description).to eq("new description")
+    end
 
-  #   it 'returns created_at' do
-  #     expect(topic.updated).to eq now
-  #   end
-  # end
+    it "reports 'created' as creation time of the original record" do
+      original_time = topic.created_at
+      expect(updated_topic.created).to eq(original_time)
+    end
+
+    it "reports 'updated' as creation time of the updated record" do
+      original_time = topic.created_at
+      expect(updated_topic.updated).to be > original_time
+      expect(updated_topic.updated).to eq(updated_topic.data.created_at)
+    end
+
+  end
+
 end

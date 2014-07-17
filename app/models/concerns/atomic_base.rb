@@ -32,7 +32,7 @@ module AtomicBase
 
     belongs_to :data, class_name: extension_class, foreign_key: fk_named
 
-    default_scope {includes(:data)}
+    default_scope {includes(:data).where(deleted: false)}
 
     def self.history(uuid = nil)
       unscoped do

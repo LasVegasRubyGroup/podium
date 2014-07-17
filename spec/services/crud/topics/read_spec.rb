@@ -5,7 +5,7 @@ RSpec.configure do |config|
 end
 
 module Crud
-  module Topics
+  module Topics 
     describe Read, needs_review: true do 
       subject(:service) { Read.new(filters) }
       let(:filters) { {} }
