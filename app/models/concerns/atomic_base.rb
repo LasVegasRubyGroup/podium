@@ -8,38 +8,33 @@ module AtomicBase
 
     self.primary_key = :uuid
 
-    # named class (contains metadata) -- Topic
-    def self.named_class
-      self.to_s
-    end                        
+    # example of descendant class -- Topic                     
 
-    # extension_class (contains the real data) -- ExtTopic
-    def self.extension_class
-      "Ext#{named_class}"
-    end                   
-
-    # foreign key -- :topic_id
-    def self.fk_named
-      "#{named_class.downcase}_id".to_sym
-    end
+    # atomic record extension class (contains the real data) -- ExtTopic
+    def self.atomic_record_extension
+      "Ext#{self}"
+    end                
 
     # extension table -- :ext_topics
     def self.extension_table
-      extension_class.tableize.to_sym
+      atomic_record_extension.constantize.table_name
     end
 
-    has_many :versions, class_name: extension_class, foreign_key: :uuid
+    has_many :versions, class_name: atomic_record_extension, foreign_key: :uuid
 
-    belongs_to :data, class_name: extension_class, foreign_key: fk_named
+    belongs_to :data, class_name: atomic_record_extension, foreign_key: :ext_id
 
     default_scope {includes(:data).where(deleted: false)}
 
     def self.history(uuid = nil)
       unscoped do
         by_update = "#{extension_table}.created_at asc"   
-        scope = joins(:versions).order(by_update)
-        scope = scope.where(uuid: uuid) if uuid
-        scope
+        scope = joins(:versions)
+        if uuid
+          scope = scope.where(uuid: uuid).order(by_update)
+        else
+          scope = scope.order(uuid: asc).order(by_update)
+        end
       end
     end
 

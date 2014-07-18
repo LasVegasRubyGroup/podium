@@ -27,14 +27,14 @@ ActiveRecord::Schema.define(version: 20140716002431) do
   add_index "ext_topics", ["uuid"], name: "index_ext_topics_on_uuid", using: :btree
 
   create_table "topics", id: false, force: true do |t|
-    t.integer  "topic_id",                   null: false
+    t.integer  "ext_id",                     null: false
     t.string   "uuid",                       null: false
     t.boolean  "deleted",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "topics", ["topic_id"], name: "index_topics_on_topic_id", unique: true, using: :btree
+  add_index "topics", ["ext_id"], name: "index_topics_on_ext_id", unique: true, using: :btree
   add_index "topics", ["uuid"], name: "index_topics_on_uuid", unique: true, using: :btree
 
 end

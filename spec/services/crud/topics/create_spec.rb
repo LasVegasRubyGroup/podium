@@ -5,14 +5,14 @@ module Crud
     describe Create do
       subject(:service) { Create.new(parameters) }
       let(:parameters) { {} }
-      let(:internal_parameters) { { uuid: uuid, topic_id: topic_id } }
+      let(:internal_parameters) { { uuid: uuid, ext_id: ext_id } }
       let(:resource_factory) { double :resource_factory, create!: topic}
       let(:extension_resource_factory) { double :extension_resource_factory, create!: ext_topic}
       let(:uuid_generator) { double :uuid_generator, uuid: uuid }
       let(:uuid) { '12345' }
-      let(:ext_topic) { double :ext_topic, attributes: {'id' => topic_id} }
+      let(:ext_topic) { double :ext_topic, attributes: {'id' => ext_id} }
       let(:topic) { double :topic}
-      let(:topic_id) {'42'}
+      let(:ext_id) {'42'}
 
       before do
         service.resource_factory = resource_factory

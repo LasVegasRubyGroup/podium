@@ -10,13 +10,13 @@ module Crud
 
     def call
       ActiveRecord::Base.transaction do
-        current_attributes = base_row.data.attributes
-        current_attributes.except!('id', 'created_at', 'updated_at')
-        params = parameters.stringify_keys.reverse_merge(current_attributes)
+        current_attributes = base_row.data.attributes.symbolize_keys
+        current_attributes.except!(:id, :created_at, :updated_at)
+        params = parameters.reverse_merge(current_attributes)
         row = extension_resource_factory.create!(params)
         sql = %Q{
           update #{base_row.class.table_name} 
-          set #{base_row.class.fk_named} = #{row.attributes['id']}
+          set ext_id = #{row.attributes['id']}
           where uuid = '#{base_row.uuid}'}
         ActiveRecord::Base.connection.execute(sql)
         base_row.reload
