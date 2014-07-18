@@ -1,6 +1,5 @@
 require 'active_support/concern'
 
-# module that mixes in support for a composite key as an alternate primary key
 module AtomicExtension
   extend ActiveSupport::Concern
 
