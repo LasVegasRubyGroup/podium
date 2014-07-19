@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20140716002431) do
   create_table "ext_topics", force: true do |t|
     t.string   "title",       default: "", null: false
     t.text     "description", default: "", null: false
-    t.string   "uuid",                     null: false
+    t.string   "base_uuid",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ext_topics", ["uuid"], name: "index_ext_topics_on_uuid", using: :btree
+  add_index "ext_topics", ["base_uuid"], name: "index_ext_topics_on_base_uuid", using: :btree
 
   create_table "topics", id: false, force: true do |t|
     t.integer  "ext_id",                     null: false

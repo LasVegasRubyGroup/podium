@@ -27,7 +27,7 @@ module Crud
     end
 
     def parameters_with_uuid(uuid)
-      parameters.reverse_merge(uuid: uuid)
+      parameters.reverse_merge(base_uuid: uuid)
     end
 
   end

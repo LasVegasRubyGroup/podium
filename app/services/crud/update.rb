@@ -22,13 +22,5 @@ module Crud
       end
     end
 
-    def default_resource_factory
-      fail NotImplementedError, 'No Default Factory: Please Override'
-    end
-
-    def default_extension_resource_factory
-      "Ext#{resource_factory}".constantize
-    end
-
   end
 end

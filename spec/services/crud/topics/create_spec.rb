@@ -23,12 +23,12 @@ module Crud
       describe '#call' do
         it 'creates a topic with the factory' do
           service.call
-          expect(extension_resource_factory).to have_received(:create!).with({uuid: uuid})
+          expect(extension_resource_factory).to have_received(:create!).with({base_uuid: uuid})
           expect(resource_factory).to have_received(:create!).with(internal_parameters)
         end
 
         it 'returns a topic' do
-          expect(extension_resource_factory).to receive(:create!).with({uuid: uuid})
+          expect(extension_resource_factory).to receive(:create!).with({base_uuid: uuid})
           expect(resource_factory).to receive(:create!).with(internal_parameters).and_return(topic)
           expect(service.call).to eq topic
         end
