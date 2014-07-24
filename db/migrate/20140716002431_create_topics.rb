@@ -14,6 +14,7 @@ class CreateTopics < ActiveRecord::Migration
       t.string :title, null: false, default: ''
       t.text :description, null: false, default: ''
 
+      t.boolean :deleted, null: false, default: false
       t.string :base_uuid, null: false
       t.timestamps
     end

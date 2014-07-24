@@ -17,9 +17,10 @@ ActiveRecord::Schema.define(version: 20140716002431) do
   enable_extension "plpgsql"
 
   create_table "ext_topics", force: true do |t|
-    t.string   "title",       default: "", null: false
-    t.text     "description", default: "", null: false
-    t.string   "base_uuid",                null: false
+    t.string   "title",       default: "",    null: false
+    t.text     "description", default: "",    null: false
+    t.boolean  "deleted",     default: false, null: false
+    t.string   "base_uuid",                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

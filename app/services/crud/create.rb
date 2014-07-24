@@ -13,8 +13,8 @@ module Crud
       ActiveRecord::Base.transaction do
         uuid = uuid_generator.uuid
         params = parameters_with_uuid(uuid)
-        row = extension_resource_factory.create!(params)
-        resource_factory.create! ext_id: row.attributes['id'], uuid: uuid
+        ext_record = extension_resource_factory.create!(params)
+        resource_factory.create! ext_id: ext_record.attributes['id'], uuid: uuid
       end
     end
 

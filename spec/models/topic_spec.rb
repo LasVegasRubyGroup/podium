@@ -26,7 +26,7 @@ describe Topic do
         it 'creates a record in the topics table' do
           n = Topic.count
           topic
-          expect(Topic.count).to eq(n+1)
+          expect(Topic.unscoped.count).to eq(n+1)
         end
 
         it 'creates a record in the ext_topics tables' do
@@ -48,9 +48,9 @@ describe Topic do
 
         it 'has an array of versions' 
 
-        it 'has returns a history for a specific row identified by uuid'
+        it 'has returns a history for a specific record identified by uuid'
 
-        it 'returns the history for all rows, sorted by uuid and ordered by ext_id'
+        it 'returns the history for all records, sorted by uuid and ordered by ext_id'
 
       end
 
@@ -72,7 +72,7 @@ describe Topic do
       it 'does not create a new record in the topics table' do
         n = Topic.count
         updated_topic
-        expect(Topic.count).to eq(n+1)   
+        expect(Topic.unscoped.count).to eq(n+1)   
       end
 
       it 'has the new title and description' do
@@ -81,14 +81,50 @@ describe Topic do
       end
 
       it "reports 'created' as creation time of the original record" do
-        original_time = topic.created_at
-        expect(updated_topic.created).to eq(original_time)
+        original_creation_time = topic.created_at
+        expect(updated_topic.created).to eq(original_creation_time)
       end
 
       it "reports 'updated' as creation time of the updated record" do
-        original_time = topic.created_at
-        expect(updated_topic.updated).to be > original_time
+        original_creation_time = topic.created_at
+        expect(updated_topic.updated).to be > original_creation_time
         expect(updated_topic.updated).to eq(updated_topic.data.created_at)
+      end
+
+    end
+
+    describe 'delete' do
+      let(:deleted_topic) { Crud::Topics::Delete.new(topic).call }
+
+      it "creates a new record in the ext_topics table" do
+        n = ExtTopic.count
+        deleted_topic
+        expect(ExtTopic.count).to eq(n+2)
+      end
+
+      it "does not create a new record in the topics table" do
+        n = Topic.count
+        deleted_topic
+        expect(Topic.unscoped.count).to eq(n+1)   
+      end
+
+      it "marks the base record deleted" do
+        expect(deleted_topic.deleted).to be_true
+      end
+
+      it "marks the extension record deleted" do
+        expect(deleted_topic.data.deleted).to be_true
+      end
+
+      it "reports 'created' as creation time of the original record" do
+        original_creation_time = topic.created_at
+        expect(deleted_topic.created).to eq(original_creation_time)
+      end
+
+      it "reports 'updated' as creation time of the deletion record" do
+        original_creation_time = topic.created_at
+        expect(deleted_topic.updated).to be > original_creation_time
+        expect(deleted_topic.updated).to eq(deleted_topic.data.created_at)
       end
 
     end
