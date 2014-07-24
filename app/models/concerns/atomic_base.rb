@@ -19,7 +19,7 @@ module AtomicBase
       atomic_record_extension.constantize.table_name
     end
 
-    has_many :versions, class_name: atomic_record_extension, foreign_key: :uuid
+    has_many :versions, class_name: atomic_record_extension, foreign_key: :base_uuid
 
     belongs_to :data, class_name: atomic_record_extension, foreign_key: :ext_id
 
