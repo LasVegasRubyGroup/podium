@@ -7,7 +7,7 @@ module Crud
 
     def sql_update(ext_record)
       "update #{base_record.class.table_name} " \
-          "set ext_id = #{ext_record.attributes['id']}, deleted = true " \
+          "set ext_id = #{ext_record['id']}, deleted = true " \
           "where uuid = '#{base_record.uuid}'"
     end
 

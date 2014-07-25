@@ -3,6 +3,7 @@ module Crud
     attr_defaultable :uuid_generator, -> { SecureRandom }
     attr_defaultable :resource_factory, -> { default_resource_factory }
     attr_defaultable :extension_resource_factory, ->{ default_extension_resource_factory }
+    attr_defaultable :transaction_factory, ->{ ActiveRecord::Base }
     attr_reader :parameters
 
     def initialize(parameters)
@@ -10,11 +11,11 @@ module Crud
     end
 
     def call
-      ActiveRecord::Base.transaction do
+      transaction_factory.transaction do
         uuid = uuid_generator.uuid
         params = parameters_with_uuid(uuid)
         ext_record = extension_resource_factory.create!(params)
-        resource_factory.create! ext_id: ext_record.attributes['id'], uuid: uuid
+        resource_factory.create! ext_id: ext_record['id'], uuid: uuid
       end
     end
 
