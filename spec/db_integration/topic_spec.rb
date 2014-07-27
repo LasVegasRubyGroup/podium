@@ -46,12 +46,6 @@ describe Topic do
           expect(topic.description).to eq("awesome")
         end
 
-        it 'has an array of versions' 
-
-        it 'has returns a history for a specific record identified by uuid'
-
-        it 'returns the history for all records, sorted by uuid and ordered by ext_id'
-
       end
 
     end
@@ -89,6 +83,15 @@ describe Topic do
         original_creation_time = topic.created_at
         expect(updated_topic.updated).to be > original_creation_time
         expect(updated_topic.updated).to eq(updated_topic.data.created_at)
+      end
+
+      it "has an array of versions" do
+        expect(updated_topic.versions.count).to eq(2)
+      end
+
+      specify "the versions are in descending order by 'id'" do
+        ids = updated_topic.versions.map(&:id)
+        expect(ids.each_cons(2).all? {|id1, id2| (id1 <=> id2) > 0}).to be_true   
       end
 
     end
