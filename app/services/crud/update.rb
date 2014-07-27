@@ -14,9 +14,14 @@ module Crud
         current_attributes.except!(:id, :created_at, :updated_at)
         updated_attributes = parameters.reverse_merge(current_attributes)
         ext_record = extension_resource_factory.create!(updated_attributes)
+        #update_base ext_id: ext_record['id']
         ActiveRecord::Base.connection.execute sql_update(ext_record)
         base_record.reload
       end
+    end
+
+    def update_base(params)
+      base_record.update! params
     end
 
     def sql_update(ext_record)
