@@ -15,10 +15,10 @@ class CreateTopics < ActiveRecord::Migration
       t.text :description, null: false, default: ''
 
       t.boolean :deleted, null: false, default: false
-      t.string :base_uuid, null: false
+      t.string :uuid, null: false
       t.timestamps
     end
-    add_index :ext_topics, :base_uuid
+    add_index :ext_topics, :uuid
 
   end
 end

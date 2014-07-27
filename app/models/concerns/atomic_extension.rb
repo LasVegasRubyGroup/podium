@@ -13,7 +13,7 @@ module AtomicExtension
       atomic_record_extension.gsub(/\AExt/, '')
     end
 
-    belongs_to :base, class_name: atomic_record_base, foreign_key: :base_uuid
+    belongs_to :base, class_name: atomic_record_base, foreign_key: :uuid
 
   end
 
