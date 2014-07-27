@@ -1,4 +1,4 @@
-require 'models_spec_helper'
+require 'db_integration_spec_helper'
 
 describe Topic do
 
