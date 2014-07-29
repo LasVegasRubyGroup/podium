@@ -9,25 +9,15 @@ module Crud
     end
 
     def call
-      ActiveRecord::Base.transaction do
-        current_attributes = base_record.data.attributes.symbolize_keys
-        current_attributes.except!(:id, :created_at, :updated_at)
-        updated_attributes = parameters.reverse_merge(current_attributes)
-        ext_record = extension_resource_factory.create!(updated_attributes)
-        #update_base ext_id: ext_record['id']
-        ActiveRecord::Base.connection.execute sql_update(ext_record)
-        base_record.reload
+      transaction_factory.transaction do
+        ext_params = base_record.data.attributes.symbolize_keys
+        ext_params.except!(:id, :deleted, :created_at, :updated_at)
+        ext_params.merge! parameters
+        new_ext = extension_resource_factory.create!(ext_params)
+        base_params = {ext_id: new_ext['id'], deleted: new_ext['deleted']}
+        base_record.update! base_params
+        base_record
       end
-    end
-
-    def update_base(params)
-      base_record.update! params
-    end
-
-    def sql_update(ext_record)
-      "update #{base_record.class.table_name} " \
-          "set ext_id = #{ext_record['id']} " \
-          "where uuid = '#{base_record.uuid}'"
     end
 
   end

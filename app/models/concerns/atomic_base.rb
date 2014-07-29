@@ -12,12 +12,7 @@ module AtomicBase
     # atomic record extension class (contains the real data) -- ExtTopic
     def self.atomic_record_extension
       "Ext#{self}"
-    end                
-
-    # extension table -- :ext_topics
-    def self.extension_table
-      atomic_record_extension.constantize.table_name
-    end
+    end    
 
     has_many :versions, ->{ order "id DESC"}, class_name: atomic_record_extension, foreign_key: :uuid
 
@@ -25,13 +20,6 @@ module AtomicBase
 
     default_scope {includes(:data).where(deleted: false)}
 
-  end
-
-  # delegate method calls to extension class 
-  def method_missing(method, *args, &block)
-      self.data.send method, *args
-    rescue NoMethodError
-      super
   end
 
   # created returns created_at for the base

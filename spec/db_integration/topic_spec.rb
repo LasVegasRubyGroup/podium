@@ -2,12 +2,13 @@ require 'db_integration_spec_helper'
 
 describe Topic do
 
-  it 'has the right extension class' do
+  it 'has the right extension class name' do
     expect(Topic.atomic_record_extension).to eq("ExtTopic")
   end
 
   it 'has the right extension table' do
-    expect(Topic.extension_table).to eq("ext_topics")
+    expect(Topic.atomic_record_extension.constantize.table_name).to \
+     eq("ext_topics")
   end
 
   it 'returns the count of topics' do
@@ -70,8 +71,8 @@ describe Topic do
       end
 
       it 'has the new title and description' do
-        expect(updated_topic.title).to eq("new title")
-        expect(updated_topic.description).to eq("new description")
+        expect(updated_topic.data.title).to eq("new title")
+        expect(updated_topic.data.description).to eq("new description")
       end
 
       it "reports 'created' as creation time of the original record" do
