@@ -1,11 +1,4 @@
 class Topic < ActiveRecord::Base
-  attr_writer :created
+  include AtomicBase
 
-  def created
-    @created || created_at
-  end
-
-  def updated
-    created_at
-  end
 end
