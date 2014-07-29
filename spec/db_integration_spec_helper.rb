@@ -1,10 +1,7 @@
 require 'base_spec_helper'
 
 require 'active_record'
-require 'active_support/test_case'
-require 'active_record/fixtures'
-
-require 'rails/version'
+require 'active_record/railtie'
 require 'rspec/rails/extensions/active_record/base'
 require 'rspec/rails/adapters'
 require 'rspec/rails/fixture_support'
