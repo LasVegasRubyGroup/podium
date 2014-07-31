@@ -20,6 +20,16 @@ module AtomicBase
 
     default_scope {includes(:data).where(deleted: false)}
 
+    # create forwarding accessors for the data columns
+    extension_class = atomic_record_extension.constantize
+    data_cols =  extension_class.column_names - %w(id deleted uuid created_at update_at)
+    code = ""
+    data_cols.each do |col|
+      code << "def #{col}; data.#{col} end\n"
+      code << "def #{col}=(value); data.#{col} = value; end\n"
+    end
+    class_eval code
+
   end
 
   # created returns created_at for the base
